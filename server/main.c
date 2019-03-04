@@ -62,15 +62,23 @@ void show_help(char *filename) {
 }
 
 
-ExcCode return_cursor() {
+ExcCode return_cursor() { //If the cursor goes out of screen of some distance, then it moves client's screen that much distance
 	int x, y, same_screen;
 	if (screen_cursor_get_position(&x, &y, &same_screen))
 		return 0;
 	const struct WindowContext *context = control_context_get();
 	int new_x = MAX(x, context->frame_left);
 	new_x = MIN(new_x, context->frame_left + context->frame_width);
+	if (new_x != x ) {
+				move_LR_handler((signed int)x-new_x); //modif reg
+				screen_cursor_set_position(new_x, y); 
+				return 0;}
 	int new_y = MAX(y, context->frame_top);
 	new_y = MIN(new_y, context->frame_top + context->frame_height);
+	if (new_y != y ) {
+				move_UD_handler((signed int)y-new_y); //modif reg
+				screen_cursor_set_position(x, new_y); 
+				return 0;}
 	if (!same_screen || x != new_x || y != new_y)
 		screen_cursor_set_position(new_x, new_y);
 	return 0;
