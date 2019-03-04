@@ -32,6 +32,8 @@ extern void move_up_handler();
 extern void move_down_handler();
 extern void move_left_handler();
 extern void move_right_handler();
+extern void move_LR_handler(signed int distance_move_screen); 
+extern void move_UD_handler(signed int distance_move_screen);
 extern void toggle_window_tracking_handler();
 extern void adjust_window_size_handler();
 extern void reset_scale_handler();
