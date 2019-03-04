@@ -154,6 +154,13 @@ void move_right_handler() {
 	active_context->frame_left += move_step;
 }
 
+void move_LR_handler(signed int distance_move_screen) {//move Left/Right screen according to cursor's escape (signed distance)
+	active_context->frame_left += distance_move_screen;
+}
+void move_UD_handler(signed int distance_move_screen) {//move screen Up/Down according to cursor's escape (signed distance)
+	active_context->frame_top += distance_move_screen;
+}
+
 void toggle_window_tracking_handler() {
 	window_tracking_enabled = !window_tracking_enabled;
 	
